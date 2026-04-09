@@ -1,0 +1,21 @@
+﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using hedomi.domain;
+using hedomi.application.DTOs.CatagoryDTO;
+
+namespace hedomi.application.Mappings___saber
+{
+    public class CatagoryMappingProfile : Profile
+    {
+        public CatagoryMappingProfile()
+        {
+            CreateMap<Category, CatagoryDTO>().ReverseMap();
+            CreateMap<Category, CreateCatagoryDTO>().ReverseMap();
+            CreateMap<Category, UpdateCatagoryDTO>().ReverseMap();
+        }
+    }
+}

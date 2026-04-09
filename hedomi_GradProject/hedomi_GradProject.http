@@ -1,0 +1,6 @@
+@hedomi_GradProject_HostAddress = http://localhost:5043
+
+GET {{hedomi_GradProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

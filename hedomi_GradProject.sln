@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hedomi_GradProject", "hedomi_GradProject\hedomi_GradProject.csproj", "{DFED16AC-06E5-448E-B83C-96CE944F320E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{595EF509-7776-4860-B4AF-138BC3931B3B} = {595EF509-7776-4860-B4AF-138BC3931B3B}
+		{5F1C0FF0-6CEA-4BBB-9D52-113E74A91732} = {5F1C0FF0-6CEA-4BBB-9D52-113E74A91732}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hedomi.infrastructure", "hedomi.infrastructure\hedomi.infrastructure.csproj", "{A58EFB40-5E95-499E-887A-00BED929658C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hedomi.domain", "hedomi.domain\hedomi.domain.csproj", "{595EF509-7776-4860-B4AF-138BC3931B3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hedomi.application", "hedomi.application\hedomi.application.csproj", "{5F1C0FF0-6CEA-4BBB-9D52-113E74A91732}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFED16AC-06E5-448E-B83C-96CE944F320E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFED16AC-06E5-448E-B83C-96CE944F320E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFED16AC-06E5-448E-B83C-96CE944F320E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFED16AC-06E5-448E-B83C-96CE944F320E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A58EFB40-5E95-499E-887A-00BED929658C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58EFB40-5E95-499E-887A-00BED929658C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58EFB40-5E95-499E-887A-00BED929658C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58EFB40-5E95-499E-887A-00BED929658C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595EF509-7776-4860-B4AF-138BC3931B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595EF509-7776-4860-B4AF-138BC3931B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595EF509-7776-4860-B4AF-138BC3931B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595EF509-7776-4860-B4AF-138BC3931B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F1C0FF0-6CEA-4BBB-9D52-113E74A91732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1C0FF0-6CEA-4BBB-9D52-113E74A91732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1C0FF0-6CEA-4BBB-9D52-113E74A91732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1C0FF0-6CEA-4BBB-9D52-113E74A91732}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EF8E4D4-350B-4F5E-83C4-8D2D722BEB24}
+	EndGlobalSection
+EndGlobal
