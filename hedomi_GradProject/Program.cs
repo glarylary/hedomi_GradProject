@@ -5,17 +5,34 @@ using hedomi.infrastructure.AppDBcontext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
+
+//Swagger
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+//Database
+builder.Services.AddDbContext<AppDBContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("hedomiConnectionString")
+    )
+);
+
+//Identity
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+})
+    .AddEntityFrameworkStores<AppDBContext>()
+    .AddDefaultTokenProviders();
+//JWT
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -29,10 +46,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = jwtSettings["Issuer"],
             ValidAudience = jwtSettings["Audience"],
             IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-                System.Text.Encoding.UTF8.GetBytes(jwtSettings["Key"]!)
+                Encoding.UTF8.GetBytes(jwtSettings["Key"]!)
             )
         };
     });
+
+//Services
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -54,6 +74,24 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+//seed test data
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    if (await userManager.FindByEmailAsync("test@hedomi.com") == null)
+    {
+        var user = new User
+        {
+            UserName = "test",
+            NormalizedUserName = "TEST",
+            Email = "test@hedomi.com",
+            Name = "Test User" // Set a non-null value
+        };
+            await userManager.CreateAsync(user, "Test@1234");
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -63,13 +101,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -42,5 +42,11 @@ namespace hedomi.infrastructure.Implementation
                 .Where(o => o.Status == "Completed")
                 .SelectMany(o => o.OrderItems)
                 .SumAsync(oi => oi.PriceAtPurchase * oi.Quantity);
+
+        public async Task<IEnumerable<Order>> GetOrdersWithinDateRangeAsync(DateTime startDate, DateTime endDate)
+            => await _context.Orders
+        .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
+        .Include(o => o.OrderItems)
+        .ToListAsync();
     }
 }
