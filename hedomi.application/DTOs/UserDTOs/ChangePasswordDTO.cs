@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace hedomi.application.DTOs.UserDTOs
 {
-    public class UpdateUserDTO
+    public class ChangePasswordDTO
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

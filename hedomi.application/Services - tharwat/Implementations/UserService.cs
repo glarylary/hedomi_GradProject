@@ -43,14 +43,14 @@ namespace hedomi.application.Services_tharwat.Implementations
             return result.Succeeded;
         }
 
-        public async Task<bool> ChangePasswordAsync(string userId, string currentPassword, string newPassword)
+        public async Task<bool> ChangePasswordAsync(string userId, ChangePasswordDTO dto)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) return false;
-
-            var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            var result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
             return result.Succeeded;
         }
+    
 
         public async Task<bool> DeleteAccountAsync(string userId, string password)
         {

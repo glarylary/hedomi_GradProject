@@ -1,3 +1,4 @@
+using hedomi.application.Services___tharwat.Interfaces;
 using hedomi.application.Services_tharwat.Implementations;
 using hedomi.application.Services_tharwat.Interfaces;
 using hedomi.domain;
@@ -13,7 +14,33 @@ var builder = WebApplication.CreateBuilder(args);
 // Controllers + Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Enter your JWT token here"
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 // Database
 builder.Services.AddDbContext<AppDBContext>(options =>
@@ -56,6 +83,7 @@ builder.Services.AddAuthentication(options =>
 
 // Services
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -74,6 +102,30 @@ using (var scope = app.Services.CreateScope())
             Name = "Test User"
         };
         await userManager.CreateAsync(user, "Test@1234");
+    }
+}
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    if (!await roleManager.RoleExistsAsync("Admin"))
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+
+    if (!await roleManager.RoleExistsAsync("User"))
+        await roleManager.CreateAsync(new IdentityRole("User"));
+
+
+    if (await userManager.FindByEmailAsync("admin@hedomi.com") == null)
+    {
+        var user = new User
+        {
+            UserName = "admin@hedomi.com",
+            Email = "admin@hedomi.com",
+            Name = "Admin User"
+        };
+        await userManager.CreateAsync(user, "Test@1234");
+        await userManager.AddToRoleAsync(user, "Admin");
     }
 }
 

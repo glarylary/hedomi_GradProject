@@ -11,7 +11,7 @@ namespace hedomi.application.Services___tharwat.Interfaces
     {
         Task<UserDTO?> GetProfileAsync(string userId);
         Task<bool> UpdateProfileAsync(string userId, UpdateUserDTO dto);
-        Task<bool> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
+        Task<bool> ChangePasswordAsync(string userId, ChangePasswordDTO dto);
         Task<bool> DeleteAccountAsync(string userId, string password);
 
         // Admin-specific operations
