@@ -10,6 +10,7 @@ namespace hedomi.application.Services_tharwat.Interfaces
 {
     public interface IAuthService
     {
-        Task<LoginResponseDTO?> LoginAsync(LoginRequestDTO dto);
+        Task<LoginResponseDTO?> LoginAsync(LoginRequestDTO LoginDTO);
+        Task<LoginResponseDTO?> RegisterAsync(CreateUserDTO CreateUserDTO);
     }
 }

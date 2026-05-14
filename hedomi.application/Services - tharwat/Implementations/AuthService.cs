@@ -62,5 +62,31 @@ namespace hedomi.application.Services_tharwat.Implementations
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
+        public async Task<LoginResponseDTO?> RegisterAsync(CreateUserDTO dto)
+        {
+            if (dto.Password != dto.PasswordConfirmed) return null; // reason 1
+
+            var existingUser = await _userManager.FindByEmailAsync(dto.Email);
+            if (existingUser != null) return null; // reason 2
+
+            var user = new User
+            {
+                UserName = dto.Email,
+                Email = dto.Email,
+                Name = dto.Name
+            };
+
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            if (!result.Succeeded)
+            {
+                // temporarily throw so you can see the actual error
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+            }
+
+            var token = GenerateJwtToken(user);
+            return new LoginResponseDTO { Token = token, Name = user.Name, Email = user.Email! };
+        }
     }
 }
