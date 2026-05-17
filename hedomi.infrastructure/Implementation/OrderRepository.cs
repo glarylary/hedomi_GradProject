@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using hedomi.domain;
 using Microsoft.EntityFrameworkCore;
 using hedomi.infrastructure.AppDBcontext;
-using hedomi.infrastructure.Repositories.Interfaces;
+using hedomi.application.Repositories.Interfaces;
 
 namespace hedomi.infrastructure.Implementation
 {

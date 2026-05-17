@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using hedomi.application.DTOs.ArticleDTOs;
+using hedomi.application.Repositories.Interfaces;
 using hedomi.application.Services___tharwat.Interfaces;
-using hedomi.infrastructure.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,12 +75,11 @@ namespace hedomi.application.Services___tharwat.Implementations
             await _articleRepository.UpdateAsync(article);
             return true;
         }
-
         public async Task<bool> DeleteArticleAsync(int id)
         {
-            var exists = await _articleRepository.ExistAsync(id);
-            if (!exists) return false;
-            await _articleRepository.DeleteAsync(id);
+            var article = await _articleRepository.GetByIdAsync(id);
+            if (article == null) return false;
+            await _articleRepository.DeleteAsync(article);
             return true;
         }
     }

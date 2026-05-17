@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using hedomi.domain;
 
-namespace hedomi.infrastructure.Repositories.Interfaces
+namespace hedomi.application.Repositories.Interfaces
 {
     public interface IOrderRepository : IGenericRepository<Order>
     {

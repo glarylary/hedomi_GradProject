@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hedomi.infrastructure.Repositories.Interfaces
+namespace hedomi.application.Repositories.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {

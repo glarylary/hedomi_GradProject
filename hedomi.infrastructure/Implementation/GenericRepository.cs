@@ -1,5 +1,5 @@
-﻿using hedomi.infrastructure.AppDBcontext;
-using hedomi.infrastructure.Repositories.Interfaces;
+﻿using hedomi.application.Repositories.Interfaces;
+using hedomi.infrastructure.AppDBcontext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

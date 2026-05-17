@@ -28,6 +28,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\hedomi.infrastructure\hedomi.infrastructure.csproj" />
+    <!-- Add these only if you need direct access -->
+	  <ProjectReference Include="..\hedomi.application\hedomi.application.csproj"/>
+      <ProjectReference Include="..\hedomi.domain\hedomi.domain.csproj" />
   </ItemGroup>
 
 </Project>
