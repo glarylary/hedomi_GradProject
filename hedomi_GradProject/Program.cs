@@ -1,8 +1,11 @@
+using hedomi.application.Services___tharwat.Implementations;
 using hedomi.application.Services___tharwat.Interfaces;
 using hedomi.application.Services_tharwat.Implementations;
 using hedomi.application.Services_tharwat.Interfaces;
 using hedomi.domain;
 using hedomi.infrastructure.AppDBcontext;
+using hedomi.infrastructure.Implementation;
+using hedomi.infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -84,6 +87,10 @@ builder.Services.AddAuthentication(options =>
 // Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

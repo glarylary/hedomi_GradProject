@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\hedomi.domain\hedomi.domain.csproj" />
+	  <ProjectReference Include="..\hedomi.infrastructure\hedomi.infrastructure.csproj" />
+
   </ItemGroup>
 
 </Project>
