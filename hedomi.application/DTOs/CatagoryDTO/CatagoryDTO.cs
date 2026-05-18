@@ -8,6 +8,7 @@ namespace hedomi.application.DTOs.CatagoryDTO
 {
     public class CatagoryDTO
     {
+        public int CategoryID { get; set; }
         public string Name { get; set; }
     }
 }

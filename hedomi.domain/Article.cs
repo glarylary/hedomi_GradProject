@@ -25,8 +25,6 @@ namespace hedomi.domain
         public string[] ImageUrls { get; set; } 
 
         public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public Brand Brand { get; set; }
 

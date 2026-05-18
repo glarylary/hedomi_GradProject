@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using hedomi.application.DTOs.ArticleDTOs;
 using hedomi.domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace hedomi.application.Mappings_Saber
 {
@@ -14,14 +9,26 @@ namespace hedomi.application.Mappings_Saber
         public ArticleMappingProfile()
         {
             CreateMap<Article, ArticleDTO>()
-                .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand))
-                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category))
-                .ForMember(dest => dest.StockQuantity, opt => opt.MapFrom(src => src.StockQuantity))
+                .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand != null ? src.Brand.BrandName : null))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null))
+                .ForMember(dest => dest.StockQuantity, opt => opt.MapFrom(src => src.StockQuantity.ToString()))
                 .ForMember(dest => dest.SKU, opt => opt.MapFrom(src => src.SKU));
 
-            CreateMap<CreateArticleDTO, Article>();
+            CreateMap<CreateArticleDTO, Article>()
+                .ForMember(dest => dest.ImageUrls, opt => opt.MapFrom(src => src.ImageUrls))
+                .ForMember(dest => dest.SKU, opt => opt.MapFrom(src => src.SKU))
+                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
+                .ForMember(dest => dest.BrandID, opt => opt.MapFrom(src => src.BrandID))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.Size, opt => opt.MapFrom(src => src.Size))
+                .ForMember(dest => dest.Color, opt => opt.MapFrom(src => src.Color))
+                .ForMember(dest => dest.Description, opt => opt.Ignore())
+                .ForMember(dest => dest.Brand, opt => opt.Ignore())
+                .ForMember(dest => dest.Category, opt => opt.Ignore())
+                .ForMember(dest => dest.ArticleID, opt => opt.Ignore());
+
             CreateMap<UpdateArticleDTO, Article>();
         }
-
     }
 }

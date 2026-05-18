@@ -9,7 +9,7 @@ using hedomi.application.Repositories.Interfaces;
 
 namespace hedomi.infrastructure.Implementation
 {
-    internal class CategoryRepository: GenericRepository<Category>, ICategoryRepository
+    public class CategoryRepository: GenericRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(AppDBContext context) : base(context)
         {

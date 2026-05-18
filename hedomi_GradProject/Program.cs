@@ -92,13 +92,15 @@ builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(cfg => {
     cfg.AddMaps(typeof(ArticleMappingProfile).Assembly);
 });
 
-var app = builder.Build();
+  var app = builder.Build();
 
 // Seed test user
 using (var scope = app.Services.CreateScope())
