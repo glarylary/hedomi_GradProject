@@ -1,3 +1,4 @@
+using hedomi.application.Mappings_Saber;
 using hedomi.application.Repositories.Interfaces;
 using hedomi.application.Services___tharwat.Implementations;
 using hedomi.application.Services___tharwat.Interfaces;
@@ -90,8 +91,12 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(cfg => {
+    cfg.AddMaps(typeof(ArticleMappingProfile).Assembly);
+});
 
 var app = builder.Build();
 
