@@ -2,6 +2,7 @@
 using hedomi.application.DTOs.ArticleDTOs;
 using hedomi.application.Repositories.Interfaces;
 using hedomi.application.Services___tharwat.Interfaces;
+using hedomi.domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,8 @@ namespace hedomi.application.Services___tharwat.Implementations
 
         public async Task<ArticleDTO> CreateArticleAsync(CreateArticleDTO dto)
         {
-            var article = _mapper.Map<domain.Article>(dto);
+            var article = _mapper.Map<Article>(dto);
+            article.CreatedAt = DateTime.UtcNow;
             await _articleRepository.AddAsync(article);
             return _mapper.Map<ArticleDTO>(article);
         }

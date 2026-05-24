@@ -14,7 +14,8 @@ namespace hedomi.application.DTOs.ArticleDTOs
         public string Size { get; set; }
         public string Color { get; set; }
         public string SKU { get; set; }
-        public string StockQuantity { get; set; }
+        public int StockQuantity { get; set; }
+        public string Description { get; set; }
         public bool IsActive { get; set; }
         public int BrandID { get; set; }
         public int CategoryID { get; set; }
