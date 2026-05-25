@@ -1,0 +1,287 @@
+:root {
+    --primary-green: #00e600;
+    --text-dark: #111;
+    --text-gray: #666;
+    --border-color: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #fff;
+    overflow: auto;
+}
+
+/* =========================
+   Layout
+========================= */
+
+.login-wrapper,
+.Forgot-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-image {
+    width: 50%;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
+        url('../Image.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand-overlay {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.quote-container {
+    color: white;
+    max-width: 400px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.side-form {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.form-content {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* =========================
+   Header
+========================= */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.square {
+    width: 14px;
+    height: 14px;
+    background: var(--primary-green);
+    border-radius: 2px;
+}
+
+.brand-name {
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-gray);
+    margin-bottom: 35px;
+}
+
+/* =========================
+   Form
+========================= */
+
+.input-field {
+    margin-bottom: 20px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary-green);
+}
+
+/* =========================
+   Password Eye
+========================= */
+
+.password-wrapper {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+}
+
+.eye-icon:hover {
+    color: #000;
+}
+
+/* =========================
+   Links & Buttons
+========================= */
+
+.forgot-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.btn-login {
+    width: 100%;
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-login:hover {
+    background: #00cc00;
+}
+
+/* =========================
+   Divider
+========================= */
+
+.divider {
+    text-align: center;
+    margin: 30px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #eee;
+    left: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+    color: #999;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   Social Buttons
+========================= */
+
+.social-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-social {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background: white;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-social:hover {
+    background: #f9f9f9;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.footer-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.footer-text a {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+}
+/* =========================
+Passwords do not match
+=========================*/
+
+.error-text {
+  color: #e63946;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: none;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 850px) {
+    .side-image {
+        display: none;
+    }
+
+    .side-form {
+        width: 100%;
+    }
+}
