@@ -100,9 +100,11 @@ builder.Services.AddAutoMapper(cfg => {
     cfg.AddMaps(typeof(ArticleMappingProfile).Assembly);
 });
 
-  var app = builder.Build();
+var app = builder.Build();
 
-// Seed test user
+
+
+// Seeding data 
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
@@ -117,6 +119,7 @@ using (var scope = app.Services.CreateScope())
         await userManager.CreateAsync(user, "Test@1234");
     }
 }
+
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
@@ -153,3 +156,4 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+

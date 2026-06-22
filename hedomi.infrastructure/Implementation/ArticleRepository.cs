@@ -23,7 +23,7 @@ namespace hedomi.infrastructure.Implementation
             .ToListAsync();
         public async Task<IEnumerable<Article>> GetArticlesByCategoryIdAsync(int categoryId)
             => await _context.Articles
-                .Where(a => a.Category.CategoryID == categoryId)
+                .Where(a => a.CategoryID == categoryId)
                 .Include(a => a.Brand)
                 .Include(a => a.Category)
                 .ToListAsync();

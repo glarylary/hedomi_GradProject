@@ -71,12 +71,14 @@ namespace hedomi.application.Services_tharwat.Implementations
         }
 
 
-        public async Task<LoginResponseDTO?> RegisterAsync(CreateUserDTO dto)
+        public async Task<(LoginResponseDTO? Response, string? Error)> RegisterAsync(CreateUserDTO dto)
         {
-            if (dto.Password != dto.PasswordConfirmed) return null; // reason 1
+            if (dto.Password != dto.PasswordConfirmed)
+                return (null, "Passwords do not match.");
 
             var existingUser = await _userManager.FindByEmailAsync(dto.Email);
-            if (existingUser != null) return null; // reason 2
+            if (existingUser != null)
+                return (null, "An account with this email already exists.");
 
             var user = new User
             {
@@ -88,12 +90,21 @@ namespace hedomi.application.Services_tharwat.Implementations
             var result = await _userManager.CreateAsync(user, dto.Password);
             if (!result.Succeeded)
             {
-                // temporarily throw so you can see the actual error
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                var errors = result.Errors.Select(e => e.Code switch
+                {
+                    "PasswordTooShort" => "Password must be at least 8 characters long.",
+                    "PasswordRequiresNonAlphanumeric" => "Password must contain at least one special character (e.g. !, @, #).",
+                    "PasswordRequiresLower" => "Password must contain at least one lowercase letter.",
+                    "PasswordRequiresUpper" => "Password must contain at least one uppercase letter.",
+                    "PasswordRequiresDigit" => "Password must contain at least one number.",
+                    _ => e.Description
+                });
+
+                return (null, string.Join(" ", errors));
             }
 
             var token = GenerateJwtToken(user);
-            return new LoginResponseDTO { Token = token, Name = user.Name, Email = user.Email! };
+            return (new LoginResponseDTO { Token = token, Name = user.Name, Email = user.Email! }, null);
         }
     }
 }

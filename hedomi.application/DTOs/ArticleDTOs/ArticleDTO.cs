@@ -13,6 +13,7 @@ namespace hedomi.application.DTOs.ArticleDTOs
         public decimal Price { get; set; }
         public string Size { get; set; }
         public string Color { get; set; }
+        public string[]? ImageUrls { get; set; }
         public string SKU { get; set; }
         public string BrandName { get; set; }
         public string CategoryName { get; set; }

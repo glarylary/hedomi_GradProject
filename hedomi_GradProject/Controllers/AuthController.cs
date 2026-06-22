@@ -26,9 +26,12 @@ namespace hedomi_GradProject.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(CreateUserDTO dto)
         {
-            var result = await _authService.RegisterAsync(dto);
-            if (result == null) return BadRequest("Registration faild");
-            return Ok(result);
+            var (response, error) = await _authService.RegisterAsync(dto);
+
+            if (error != null)
+                return BadRequest(new { message = error });
+
+            return Ok(response);
         }
     }
 }

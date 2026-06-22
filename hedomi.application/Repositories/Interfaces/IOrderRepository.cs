@@ -9,6 +9,7 @@ namespace hedomi.application.Repositories.Interfaces
 {
     public interface IOrderRepository : IGenericRepository<Order>
     {
+            Task<Order> CreateOrderAsync(Order order);
             Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId);
             Task<Order> GetOrderWithItemsAsync(int orderId);
             Task<IEnumerable<Order>> GetOrderByStatusAsync(string status);

@@ -11,25 +11,26 @@ namespace hedomi.domain
         public int ArticleID { get; set; }
         public int BrandID { get; set; }
 
-        public string Name { get; set; } 
-        public string Description { get; set; }
-        public string SKU { get; set; } // Stock Keeping Unit
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
+        public string SKU { get; set; } = string.Empty; // Stock Keeping Unit
 
         public decimal Price { get; set; }
-        public string Size { get; set; }
-        public string Color { get; set; }
-
-    
+        public string Size { get; set; } = string.Empty;
+        public string Color { get; set; } = string.Empty;
 
         public int StockQuantity { get; set; }
-        public string[] ImageUrls { get; set; } 
+        public string[]? ImageUrls { get; set; }
 
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-        public Brand Brand { get; set; }
+        // Navigation properties - allow nulls for EF materialization
+        public Brand? Brand { get; set; }
 
-        public Category Category { get; set; }
+        // Fixed: keep numeric foreign key and add navigation property
+        public int CategoryID { get; set; }
+        public Category? Category { get; set; }
     }
 }
