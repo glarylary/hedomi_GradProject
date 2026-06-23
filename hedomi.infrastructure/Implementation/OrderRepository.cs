@@ -15,6 +15,13 @@ namespace hedomi.infrastructure.Implementation
         {
         }
 
+        public async Task<Order> CreateAsync(Order order)
+        {
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync();
+            return order;
+        }
+
         public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
             => await ((DbContext)_context).Set<Order>()
                 .Where(o => o.UserID == userId)

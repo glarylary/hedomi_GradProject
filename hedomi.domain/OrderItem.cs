@@ -13,7 +13,7 @@ namespace hedomi.domain
         public int ArticleID { get; set; }
         public int Quantity { get; set; }
         public decimal PriceAtPurchase { get; set; } // Store price at time of order
-        public string? image { get; set; } // Store image URL at time of order
+        public string? imageUrl { get; set; } // Store image URL at time of order
 
         public Order Order { get; set; }
         public Article Article { get; set; }

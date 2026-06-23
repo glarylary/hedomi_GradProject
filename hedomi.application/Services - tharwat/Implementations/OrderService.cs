@@ -3,11 +3,6 @@ using hedomi.application.DTOs.OrderDTOs;
 using hedomi.application.Repositories.Interfaces;
 using hedomi.application.Services___tharwat.Interfaces;
 using hedomi.domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace hedomi.application.Services___tharwat.Implementations
 {
@@ -16,11 +11,14 @@ namespace hedomi.application.Services___tharwat.Implementations
         private readonly IOrderRepository _orderRepository;
         private readonly IArticleRepository _articleRepository;
         private readonly IMapper _mapper;
-        public OrderService(IOrderRepository orderRepository, IMapper mapper)
+
+        public OrderService(IOrderRepository orderRepository, IArticleRepository articleRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
+            _articleRepository = articleRepository;
             _mapper = mapper;
         }
+
         public async Task<OrderDTO?> CreateOrderAsync(string userId, CreateOrderDTO dto)
         {
             decimal total = 0;
@@ -57,28 +55,29 @@ namespace hedomi.application.Services___tharwat.Implementations
             return _mapper.Map<OrderDTO>(order);
         }
 
+        public async Task<IEnumerable<OrderDTO>> GetMyOrdersAsync(string userId)
+        {
+            var orders = await _orderRepository.GetOrdersByUserIdAsync(userId);
+            return _mapper.Map<IEnumerable<OrderDTO>>(orders);
+        }
+
         public async Task<OrderDTO?> GetOrderByIdAsync(int orderId)
         {
             var order = await _orderRepository.GetOrderWithItemsAsync(orderId);
             return order == null ? null : _mapper.Map<OrderDTO>(order);
         }
 
-        public async Task<IEnumerable<OrderDTO>> GetOrdersByUserIdAsync(string userId)
-        {
-            var orders = await _orderRepository.GetOrdersByUserIdAsync(userId);
-            return _mapper.Map<IEnumerable<OrderDTO>>(orders);
-        }
-
+        // Admin
         public async Task<IEnumerable<OrderDTO>> GetAllOrdersAsync()
         {
             var orders = await _orderRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<OrderDTO>>(orders);
         }
+
         public async Task<bool> UpdateOrderStatusAsync(int orderId, string status)
         {
             var order = await _orderRepository.GetByIdAsync(orderId);
-            if (order == null)
-                return false;
+            if (order == null) return false;
             order.Status = status;
             await _orderRepository.UpdateAsync(order);
             return true;
